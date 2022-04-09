@@ -44,6 +44,7 @@ class OrbitPropagator:
         self.rs = self.ys[:,:3]
         self.vs = self.ys[:,3:]
     
+
     def diffy_q(self,t,y):
         #unpack the states that we need
         rx,ry,rz,vx,vy,vz=y
@@ -63,8 +64,8 @@ class OrbitPropagator:
         ax = fig.add_subplot(111,projection = '3d')
 
         #plot trajectory and starting point
-        ax.plot(self.r[:,0],self.r[:,1],self.r[:,2],'b',label = 'Trajectory',zorder = 1)
-        ax.plot([self.r[0,0]],[self.r[0,1]],[self.r[0,2]],'bo',label = 'Initial Position', zorder = 1)
+        ax.plot(self.rs[:,0],self.rs[:,1],self.rs[:,2],'b',label = 'Trajectory',zorder = 1)
+        ax.plot([self.rs[0,0]],[self.rs[0,1]],[self.rs[0,2]],'bo',label = 'Initial Position', zorder = 1)
 
         #plot earth
         _u,_v = np.mgrid[0:2*np.pi:20j,0:np.pi:10j]
@@ -80,7 +81,7 @@ class OrbitPropagator:
         u,v,w = [[l,0,0],[0,l,0],[0,0,l]]
         ax.quiver(x,y,z,u,v,w,color = 'k')
 
-        max_val = np.max(np.abs(self.r))
+        max_val = np.max(np.abs(self.rs))
         ax.set_xlim([-max_val,max_val])
         ax.set_ylim([-max_val,max_val])
         ax.set_zlim([-max_val,max_val])

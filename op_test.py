@@ -7,7 +7,7 @@ plt.style.use('dark_background')
 import planetary_data as pd
 from OrbitPropagator import OrbitPropagator as OP
 
-cb = pd.
+cb = pd.earth
 
 if __name__ == "__main__":
     #Initial condition
@@ -16,7 +16,7 @@ if __name__ == "__main__":
 
     #initial position and velocity vectors
     r0 = [r_mag,r_mag*0.01,r_mag*-0.1]#it's a python list, that is because we want to add the lists together
-    v0 = [0,v_mag,v_mag*0,3]
+    v0 = [0,v_mag,v_mag*0.3]
 
     #timespan
     tspan = 100*60.0
