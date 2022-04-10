@@ -16,7 +16,6 @@ class OrbitPropagator:
         self.dt = dt
         self.cb = cb
 
-    def propagate_orbit(self):
         #total number of steps:
         self.n_steps = int(np.ceil(self.tspan/self.dt))
 
@@ -33,6 +32,9 @@ class OrbitPropagator:
         self.solver = ode(self.diffy_q)
         self.solver.set_integrator('lsoda')
         self.solver.set_initial_value(self.y0,0)
+
+    def propagate_orbit(self):
+        
 
         #propagate orbit
         while self.solver.successful() and self.step<self.n_steps:
@@ -72,7 +74,8 @@ class OrbitPropagator:
         _x = self.cb['radius']*np.cos(_u)*np.sin(_v)
         _y = self.cb['radius']*np.sin(_u)*np.sin(_v)
         _z = self.cb['radius']*np.cos(_v)
-        ax.plot_surface(_x,_y,_z,cmap ="gist_earth",zorder = 0)
+        #ax.plot_surface(_x,_y,_z,cmap ="gist_earth",zorder = 0)
+        ax.plot_wireframe(_x,_y,_z,color = "k", linewidth = 0.5)
 
         
 
