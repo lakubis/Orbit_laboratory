@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 plt.style.use('seaborn-dark')
 import planetary_data as pd
 
-from mpl_interactions import ioff, panhandler, zoom_factory
 
 d2r = np.pi/100.0
 
