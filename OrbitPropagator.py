@@ -4,15 +4,24 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from scipy.integrate import ode
+import tools as t
 
 import planetary_data as pd
 
 #Ini adalah class pertama
 class OrbitPropagator:
     #If you don't pass anything in as the cb, it will take earth as the default value
-    def __init__(self,r0,v0,tspan,dt,cb=pd.earth):
-        self.r0 = r0
-        self.v0 = v0
+    #If coes is true, that means you are inserting the classical orbital elements, if coes is false, that means you are inserting the velocity and the initial position of the  body
+    def __init__(self,state0,tspan,dt,coes = False,cb=pd.earth):
+        if coes:
+            self.r0, self.v0 = t.coes2rv(r0,v0,mu = cb['mu'])
+        else:
+            self.r0 = state0[:3]
+            self.vo = state0[3:]
+
+
+        #initial conditions
+        self.y0 = self.r0.tolist() + self.v0.tolist() #because both of them are lists, they will combine instead of adding up the components 
         self.tspan = tspan
         self.dt = dt
         self.cb = cb
@@ -24,8 +33,6 @@ class OrbitPropagator:
         self.ys = np.zeros((self.n_steps,6))
         self.ts = np.zeros((self.n_steps,1))
 
-        #initial conditions
-        self.y0 = self.r0.tolist() + self.v0.tolist() #because both of them are lists, they will combine instead of adding up the components
         self.ys[0] = np.array(self.y0)
         self.step = 1 #because we want the next state to fill in 1
 

@@ -2,7 +2,7 @@
 from tkinter import Widget
 
 
-#%matplotlib Widget
+%matplotlib Widget
 
 import numpy as np
 from math import sqrt
@@ -51,7 +51,9 @@ if __name__ == "__main__":
 
 
 # %%
-plt.style.available
+#plt.style.available
 
 
 
+
+# %%
