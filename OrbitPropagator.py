@@ -2,6 +2,7 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
+
 from scipy.integrate import ode
 
 import planetary_data as pd
@@ -24,7 +25,7 @@ class OrbitPropagator:
         self.ts = np.zeros((self.n_steps,1))
 
         #initial conditions
-        self.y0 = self.r0 + self.v0 #because both of them are lists, they will combine instead of adding up the components
+        self.y0 = self.r0.tolist() + self.v0.tolist() #because both of them are lists, they will combine instead of adding up the components
         self.ys[0] = np.array(self.y0)
         self.step = 1 #because we want the next state to fill in 1
 
@@ -74,8 +75,8 @@ class OrbitPropagator:
         _x = self.cb['radius']*np.cos(_u)*np.sin(_v)
         _y = self.cb['radius']*np.sin(_u)*np.sin(_v)
         _z = self.cb['radius']*np.cos(_v)
-        #ax.plot_surface(_x,_y,_z,cmap ="gist_earth",zorder = 0)
-        ax.plot_wireframe(_x,_y,_z,color = "k", linewidth = 0.5)
+        ax.plot_surface(_x,_y,_z,cmap ="gist_earth",zorder = 0)
+        #ax.plot_wireframe(_x,_y,_z,color = "k", linewidth = 0.5)
 
         
 
@@ -93,6 +94,8 @@ class OrbitPropagator:
         ax.set_box_aspect((1,1,1))
 
         if show_plot:
+            panhandler = panhandler(fig)
+            display(fig.canvas)
             plt.show()
         
         if save_plot:
