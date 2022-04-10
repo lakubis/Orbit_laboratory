@@ -98,8 +98,10 @@ def ecc_anomaly(arr,method,tol = 1e-8):
         for n in range(200): #arbitrary number of steps
             ratio = (E0 - e*np.sin(E0) - Me)/(1-e*np.cos(E0))
             if abs(ratio) < tol:
-                if n==0 return E0
-                else: return E1
+                if n==0:
+                    return E0
+                else: 
+                    return E1
             else:
                 E1 = E0 - ratio
                 E0 = E1

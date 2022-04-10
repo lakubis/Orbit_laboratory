@@ -14,7 +14,7 @@ class OrbitPropagator:
     #If coes is true, that means you are inserting the classical orbital elements, if coes is false, that means you are inserting the velocity and the initial position of the  body
     def __init__(self,state0,tspan,dt,coes = False,cb=pd.earth):
         if coes:
-            self.r0, self.v0 = t.coes2rv(r0,v0,mu = cb['mu'])
+            self.r0, self.v0 = t.coes2rv(state0,deg = True,mu = cb['mu'])
         else:
             self.r0 = state0[:3]
             self.vo = state0[3:]
